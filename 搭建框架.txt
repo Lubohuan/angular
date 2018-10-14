@@ -1,0 +1,20 @@
+1、创建项目，添加css、js、img、tpl文件夹，添加必须引用的css、js文件，添加自定义的css、js文件以及img图片，并创建完整的引导页面kaifanla.html；
+
+2、编写kaifanla.html文件：
+  定义模块ng-app=”kaifanla”
+  引入bootstrap.css以及自定义的css文件
+  定义用于替换模板的视图
+  引入angular.js angular-route.js文件，并引入自定义的js文件。
+
+3、添加模板文件：添加 start/main/detail/order/myorder页面，每个页面中删掉原有内容，添加一个文字；
+
+4、编写 kaifanla.js 文件
+  定义各自的控制器
+  定义路由：为所有模板定义路由，默认跳转到start
+
+5、测试：跳转是否正常，是否有错误
+
+
+
+
+

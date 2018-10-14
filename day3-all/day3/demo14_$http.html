@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+</head>
+<body>
+<div ng-controller="myCtrl">
+
+  <table>
+    <thead>
+      <tr>
+        <th>姓名</th>
+        <th>年龄</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="stu in stuList">
+        <td>{{stu.name}}</td>
+        <td>{{stu.age}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+<script>
+  var app = angular.module('myApp', ['ng']);
+
+  //对于所有的post请求，全局设置
+  app.run(function ($http) {
+    $http.defaults.headers.post =
+    {'Content-Type':'application/x-www-form-urlencoded'};
+  })
+
+
+  app.controller('myCtrl', function ($scope,$http) {
+
+   /* $http({method:'get',url:'data/test.json'})
+      .success(function (data) {
+        console.log(data);
+        $scope.stuList = data;
+      })
+      .error(function (error) {
+        console.log(error);
+      })*/
+
+   /* $http.get('data/test.json')
+      .success(function (data) {
+        $scope.stuList = data;
+      })
+
+    //针对本控制器内部生效
+    $http.defaults.headers.post = {'Content-Type':'application/x-www-form-urlencoded'};
+    $http.post('',data)*/
+
+ /*   $http.post('data/test.php')
+      .success(function (data) {
+        $scope.stuList = data;
+        console.log(data);
+      })*/
+
+    $http({method:'post',url:'data/test.php'})
+      .success(function (data) {
+        console.log(data);
+        $scope.stuList = data;
+      })
+      .error(function (error) {
+        console.log(error);
+      })
+
+  });
+</script>
+</body>
+</html>

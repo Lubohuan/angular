@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+  <script src="js/angular-route.js"></script>
+</head>
+<body>
+
+<!--指定盛放代码片段的容器-->
+<div ng-view></div>
+
+<script>
+  //创建myApp模块 并指定依赖于ng和ngRoute
+  var app = angular.module('myApp',['ng','ngRoute']);
+
+  //配置路由词典
+  app.config(function ($routeProvider) {
+
+    //添加了3条路由信息 加上了异常处理
+    // （当路由地址错误时，重定向到起始页面）
+    $routeProvider
+      .when("/start",{
+        templateUrl:'tpl/start.html'
+      })
+      .when('/login',{
+        templateUrl:'tpl/login.html'
+      })
+      .when('/main',{
+        templateUrl:'tpl/main.html'
+      })
+      .otherwise({redirectTo:'/start'});
+
+  })
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

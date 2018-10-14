@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+</head>
+<body ng-controller="myCtrl">
+
+<form name="temp_form" ng-submit="submitOrder()">
+  <label for="t_name">用户名</label>
+  <input type="text" id="t_name"
+         name="t_name" ng-model="name" required/>
+  <span ng-show="temp_form.t_name.$error.required">用户名不能为空</span>
+  <span ng-show="temp_form.t_name.$valid">验证通过</span>
+  <span ng-show="temp_form.t_name.$invalid">验证未通过</span>
+
+  <br/>
+  <label for="t_email">输入邮箱</label>
+  <input type="email" id="t_email"
+         name="t_email" ng-model="email" required/>
+  <span ng-show="temp_form.t_email.$error.required">邮箱不能为空</span>
+  <span ng-show="temp_form.t_email.$error.email">邮箱格式不对</span>
+
+  <br/>
+  <input type="checkbox" ng-model="isAgree"
+         ng-true-value="1"
+         ng-false-value="'no'"/> 同意
+  <br/>
+  <input type="submit"
+         ng-disabled="temp_form.$invalid"
+         value="提交"/>
+  
+</form>
+
+<script>
+  var app = angular.module('myApp',['ng']);
+
+  app.controller('myCtrl',['$scope', function ($scope) {
+
+    $scope.submitOrder = function () {
+      console.log("name is "+$scope.name+" email is "+$scope.email
+      +" 是否同意: "+$scope.isAgree);
+    }
+
+  }])
+</script>
+
+</body>
+</html>

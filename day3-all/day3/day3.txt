@@ -1,0 +1,108 @@
+一、服务(service)
+
+服务：是一个单例对象（$scope）
+
+服务使用方法：在创建一个对象，比如说控制器，在回调中直接在参数中写上服务名称，就可以将服务注入进来，可以使用服务。
+
+服务的两大类：
+①内置服务 $location/$scope/.. 
+②自定义服务
+
+
+面试问题：控制器和作用范围
+$scope $rootScope
+
+①不同的控制器有着不同的作用范围对象，是相互隔离的,不能直接相互调用的。
+②每一个ng的应用都会有一个根作用域对象（$rootScope），是在ng启动的时候框架自己初始化过了 id=1,其余的各个控制器所依赖注入的$scope都是$rootScope的子元素
+
+启动过程：初始化数据（$rootScope等）、启动ng（ngclick ngSrc--》编译处理成浏览器能够识别的属性）==》$digest循环
+
+③不同的控制器之间 如果要想实现数据的共享，将数据放在$rootScope,或者将数据放在父控制器中。
+
+
+子作用域对象 是可以直接调用 父作用域对象 中的变量和方法。
+父作用域对象 要想调用 子作用域对象中指定的变量或者方法怎么办？
+
+//将事件从父传递给子
+$scope.$broadcast(eventName,data)
+
+//将事件从子传递父
+$scope.$emit(eventName,data);
+
+//接收事件以及传递的参数
+$scope.$on(eventName,function(event,data){
+
+})
+
+控制器之间进行通信的3种方式：
+$rootScope、父控制器、事件传递数据
+
+
+练习：
+（15:13-15:28）
+①架子
+②创建模型数据（对象数组）
+③通过点击查看，拿到选中的结果
+
+
+④全选
+ngChecked
+ngClick 指定复选框点击时的处理函数
+
+
+
+二、内置服务
+
+例子：将num绑定到视图上，在定时器修改num，发现视图不更新
+
+why? ng本身的循环和定时器原生js有一个冲突
+how?$scope.$apply();
+
+双向数据绑定的工作原理：
+当我们去做数据绑定时，ng框架会自动的给数据添加一个监听watcher,对应有一个回调当数据变化时，更新视图
+
+如果知道数据发生了变化？
+ng会周期性的执行一个函数来检查模型数据是否发生了变化->$digest
+
+什么时候会执行$digest?
+ngClick ngSrc常用的ng指令都会触发$digest,也可以手工触发$scope.$digest()
+
+$scope.$apply();-->$rootScope.$digest()
+
+
+①$interval、$timeout
+
+$interval = setInterval+$scope.$apply
+
+练习：
+使用$interval 实现一个图片轮播。
+$scope.urlList=['','','']
+
+img ng-src、
+每隔一秒钟切换不同的图片显示出来，10s停止轮播。
+
+②$http
+$http.get  $http({methd:'get',url:''})
+$http.post $http({methd:'post',url:'',data:''}),需要加上一个设置：
+ app.run(function ($http) {
+        $http.defaults.headers.post = {'Content-Type':'application/x-www-form-urlencoded'};
+    })
+
+条件：
+①apache跑起来
+②打开文件时候 默认80端口
+③文件需要放在htdocs
+
+
+练习：购物车
+初始化的数据是从服务器端返回。
+
+
+
+
+
+
+
+
+
+

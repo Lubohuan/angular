@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+</head>
+<body>
+
+<div ng-controller="myCtrl">
+  <!-- 一个过滤器-->
+  <p>{{price | currency:'￥'}}</p>
+
+  <!-- 多重过滤-->
+  <ul>
+    <li ng-repeat=
+          "stu in stuList | orderBy:'score':true | limitTo:3">
+      {{stu.age+" "+stu.score}}
+    </li>
+  </ul>
+
+</div>
+
+<script>
+  var app = angular.module('myApp', ['ng']);
+
+  app.controller('myCtrl', function ($scope) {
+    $scope.price = 20;
+    $scope.stuList = [
+      {age:20,score:80},
+      {age:25,score:70},
+      {age:21,score:88},
+      {age:23,score:89},
+      {age:29,score:60},
+    ];
+  });
+</script>
+</body>
+</html>

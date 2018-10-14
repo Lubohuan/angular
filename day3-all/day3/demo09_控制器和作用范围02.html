@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+</head>
+<body ng-controller="parentCtrl">
+
+<div ng-controller="myCtrl01">
+  <button ng-click="funcClick()">clickMe</button>
+</div>
+
+<div ng-controller="myCtrl02">
+  <button ng-click="funcClick()">点我</button>
+</div>
+
+
+<script>
+  var app = angular.module('myApp', ['ng']);
+
+  app.controller('parentCtrl', function ($scope) {
+    $scope.funcClick = function () {
+      console.log('按钮被点击了');
+    }
+  });
+
+  app.controller('myCtrl01', function ($scope) {
+
+  });
+
+  app.controller('myCtrl02', function ($scope) {
+
+  })
+</script>
+</body>
+</html>

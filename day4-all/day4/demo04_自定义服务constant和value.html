@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+</head>
+<body>
+<div ng-controller="myCtrl">
+  <p>{{"id is "+id}}</p>
+  <p>{{"price is "+price}}</p>
+  <button ng-click="reset()">重置数据</button>
+</div>
+<script>
+  var app = angular.module('myApp', ['ng']);
+
+  //使用constant去创建常量服务:配置数据
+  app.constant("$ID",{id:100});
+
+  //使用value去创建服务：创建对象
+  app.value("$PRICE",{price:5});
+
+  app.controller('myCtrl', function ($scope,$ID,$PRICE) {
+    $scope.id = $ID.id;
+    $scope.price = $PRICE.price;
+
+    $scope.reset = function () {
+      //通过extend方法重置服务中的数据
+      angular.extend($ID,{id:0});
+      angular.extend($PRICE,{price:0});
+
+      $scope.id = $ID.id;
+      $scope.price = $PRICE.price;
+    }
+
+  });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+

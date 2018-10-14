@@ -1,0 +1,9 @@
+<!--使用ngInclude指令引入页头页尾-->
+
+<div ng-include="'tpl/include/header.html'"></div>
+
+<h1>这是起始页面</h1>
+
+<button ng-click="jump('/login/5')">去登录</button>
+
+<div ng-include="'tpl/include/footer.html'"></div>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+  <script src="js/angular-route.js"></script>
+</head>
+<body>
+
+<div ng-view>
+
+</div>
+
+<script>
+  var app = angular.module('myApp',['ng','ngRoute'])
+
+  app.config(function ($routeProvider) {
+
+    $routeProvider
+      .when("/myRegister",{
+        templateUrl:'tpl/register.html'
+      })
+      .when('/myPerson',{
+        templateUrl:'tpl/person.html'
+      })
+      .otherwise({redirectTo:'/myRegister'})
+
+  })
+
+</script>
+
+</body>
+</html>

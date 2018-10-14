@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html ng-app>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+</head>
+<body>
+<!--ngShow/ngHide-->
+<span ng-init="hasMore=false"></span>
+
+<button ng-show="hasMore">加载更多</button>
+<p ng-hide="hasMore">没有更多数据可以加载了</p>
+
+<!-- ngSrc-->
+<span ng-init="url='1.jpg'"></span>
+<img ng-src="img/{{url}}" alt=""/>
+
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+</head>
+<body ng-controller="myCtrl">
+
+<table>
+  <thead>
+  <tr>
+    <th>请选择</th>
+    <th>姓名</th>
+    <th>生日</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="obj in list">
+      <td>
+        <input type="checkbox" ng-model="obj.isSelected"/>
+      </td>
+      <td>
+        {{obj.name}}
+      </td>
+      <td>
+        {{obj.birthday}}
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<input type="checkbox"/> 全选/取消全选
+<br/>
+<button ng-click="checkResult()">查看</button>
+
+<script>
+  var app = angular.module('myApp',['ng']);
+
+  app.controller('myCtrl', function ($scope) {
+      $scope.list = [
+        {name:'king',birthday:'2011-11-11',isSelected:false},
+        {name:'Golden',birthday:'2012-12-12',isSelected:false}
+      ]
+
+      $scope.checkResult = function () {
+        var result = "";
+        for(var i=0;i<$scope.list.length;i++)
+        {
+          var obj = $scope.list[i]
+          if(obj.isSelected)
+          {
+             result+=(obj.name+'被选中');
+          }
+        }
+        if(result == "")
+        {
+          result = "都没选中"
+        }
+        alert(result);
+
+      }
+  });
+
+</script>
+
+</body>
+</html>

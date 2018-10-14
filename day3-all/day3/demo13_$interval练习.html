@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+</head>
+<body>
+<div ng-controller="myCtrl">
+
+  <img ng-src="img/{{urlList[index]}}" alt=""/>
+
+</div>
+<script>
+  var app = angular.module('myApp', ['ng']);
+
+  app.controller('myCtrl', function ($scope,$interval) {
+
+    $scope.index = 0;
+    $scope.time = 0;
+    $scope.urlList = ["1.jpg","2.jpg","3.jpg","4.jpg"];
+
+    //通过$interval修改数据
+    id  = $interval(function () {
+      $scope.time++;
+      $scope.index++;
+      if($scope.index > 3)
+      {
+        $scope.index = 0;
+      }
+
+      if($scope.time == 10){
+        $interval.cancel(id);
+      }
+
+    },1000)
+
+
+
+  });
+</script>
+</body>
+</html>

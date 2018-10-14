@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+</head>
+<body ng-controller="myCtrl">
+<button ng-click="add()">添加</button>
+<table>
+  <thead>
+  <tr>
+    <th>单价</th>
+    <th>数量</th>
+    <th>小计</th>
+    <th>删除</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="obj in list">
+      <td>{{obj.price}}</td>
+      <td>{{obj.count}}</td>
+      <td>{{obj.price*obj.count}}</td>
+      <td>
+        <button ng-click="delete($index)">删除</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<script>
+  var app = angular.module('myApp',['ng']);
+
+  app.controller('myCtrl', function ($scope,$http) {
+
+    $http
+      .get('data/test.json')
+      .success(function(data){
+        console.log(data);
+        $scope.list=data;
+      })
+
+    $scope.add = function () {
+      var price = (Math.random()*100).toFixed(2);
+      var count = Math.round(Math.random()*10);
+      $scope.list.push({"price":price,"count":count});
+    }
+
+    $scope.delete = function (index) {
+      $scope.list.splice(index,1);
+    }
+
+  })
+
+</script>
+
+</body>
+</html>

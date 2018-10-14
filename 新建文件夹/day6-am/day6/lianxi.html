@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html ng-app="myModule">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+  <script src="js/angular-route.js"></script>
+</head>
+<body ng-controller="parentCtrl">
+
+<!--盛放代码片段的容器-->
+<div ng-view></div>
+
+<script>
+  var app = angular.module('myModule',['ng','ngRoute']);
+
+  //配置路由词典
+  app.config(function ($routeProvider) {
+    $routeProvider
+      .when("/start",{
+        templateUrl:'tpl/start.html'
+      })
+      .when("/login",{
+        templateUrl:'tpl/login.html'
+      })
+      .when('/login/:fromId',{
+        controller:'loginCtrl',
+        templateUrl:'tpl/login.html'
+      })
+      .when("/register",{
+        templateUrl:'tpl/register.html'
+      })
+      .when("/main",{
+        templateUrl:'tpl/main.html'
+      })
+      .when('/main/:id',{
+        controller:'mainCtrl',
+        templateUrl:'tpl/main.html'
+      })
+      .otherwise({redirectTo:'/start'})
+  })
+
+  app.controller('parentCtrl',['$scope','$location',
+    function($scope,$location){
+        $scope.jump = function (routePath) {
+          $location.path(routePath);
+        }
+    }
+  ])
+
+  app.controller('loginCtrl',['$scope','$routeParams',
+    function($scope,$routeParams){
+      $scope.id = $routeParams.fromId
+    }
+  ])
+
+  app.controller('mainCtrl',['$scope','$routeParams',
+    function($scope,$routeParams){
+      $scope.id = $routeParams.id
+    }
+  ])
+
+
+</script>
+
+</body>
+</html>

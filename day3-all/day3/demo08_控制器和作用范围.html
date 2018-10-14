@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+</head>
+<body>
+
+<div ng-controller="myCtrl01">
+  <p>{{"ctrl01 "+num}}</p>
+</div>
+
+<div ng-controller="myCtrl02">
+  <p>{{"ctrl02 "+num}}</p>
+  <p>{{"ctrl02 "+school}}</p>
+
+  <div ng-controller="myCtrl03">
+    <p>{{"ctrl03 "+count}}</p>
+  </div>
+
+</div>
+
+<script>
+  var app = angular.module('myApp', ['ng']);
+
+  app.controller('myCtrl01', function ($scope,$rootScope) {
+    $scope.num = 10;
+    console.log($scope);
+    console.log($rootScope);
+    $rootScope.school='tarena';
+  });
+
+  app.controller('myCtrl02', function ($scope) {
+    console.log($scope);
+    $scope.count = 100;
+  });
+
+  app.controller('myCtrl03', function ($scope) {
+
+  })
+
+</script>
+</body>
+</html>

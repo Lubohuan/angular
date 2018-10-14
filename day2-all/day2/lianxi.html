@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+</head>
+<body>
+
+<div ng-controller="myCtrl">
+    <button ng-click="add()">添加</button>
+    <table>
+      <thead>
+        <tr>
+          <th>单价</th>
+          <th>数量</th>
+          <th>小计</th>
+          <th>删除</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="obj in list">
+          <td>{{obj.price}}</td>
+          <td>{{obj.count}}</td>
+          <td>{{obj.price*obj.count}}</td>
+          <td>
+            <button ng-click="delete($index)">删除</button>
+          </td>
+          <!--<td>-->
+            <!--{{$index}}-->
+          <!--</td>-->
+        </tr>
+      </tbody>
+    </table>
+</div>
+
+<script>
+  //模块的创建和调用
+  var app = angular.module('myApp',['ng']);
+
+  //控制器的创建和调用
+  app.controller('myCtrl',function($scope){
+
+      $scope.list = [
+        {price:4,count:5},
+        {price:20,count:10}
+      ];
+
+      //添加功能执行的方法
+      $scope.add = function () {
+        $scope.list.push({price:4,count:20});
+      }
+
+      //删除功能
+      $scope.delete = function(index){
+        $scope.list.splice(index,1);
+      }
+  })
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+</head>
+<body>
+
+<div ng-init="name='jack';age=20;scroe=80">
+  <p>{{3+5}}</p>
+  <p>{{name}}</p>
+  <p>{{age}}</p>
+</div>
+
+<div>
+  <h1>{{5-3}}</h1>
+</div>
+
+
+<ul ng-init="list=[11,22,33];
+      car={name:'BMW',price:30}">
+  <!--<li ng-repeat="tmp in list">{{tmp}}</li>-->
+
+  <!--<li ng-repeat="tmp in car">{{tmp}}</li>-->
+
+  <!--ngRepeat第二种语法-->
+  <li ng-repeat="(key,value) in car">
+    {{"key is "+key+" value is "+value}}
+  </li>
+
+  <!--<li>{{list[0]}}</li>-->
+  <!--<li>{{list[1]}}</li>-->
+  <!--<li>{{list[2]}}</li>-->
+</ul>
+
+
+<!--ngIf指令的用法-->
+
+<span ng-init="isMember=false"></span>
+
+<p ng-if="isMember">仅会员可见</p>
+
+
+
+</body>
+</html>

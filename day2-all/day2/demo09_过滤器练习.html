@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+</head>
+<body>
+<div ng-controller="myCtrl">
+
+  <!-- 按照age降序-->
+  <ul>
+    <li ng-repeat="obj in stuList | orderBy:'age':true">
+      {{obj.age +" "+obj.name+" "+obj.score}}
+    </li>
+  </ul>
+
+  <!-- 按照name升序-->
+  <ul>
+    <li ng-repeat="obj in stuList | orderBy:'name'">
+      {{obj.age +" "+obj.name+" "+obj.score}}
+  </li>
+  </ul>
+
+  <!-- 按照成绩降序-->
+  <ul>
+    <li ng-repeat="obj in stuList | orderBy:'score':true | limitTo:3">
+      {{obj.age +" "+obj.name+" "+obj.score}}
+    </li>
+  </ul>
+
+  <p>{{count | number:2}}</p>
+
+</div>
+<script>
+  var app = angular.module('myApp', ['ng']);
+
+  app.controller('myCtrl', function ($scope) {
+
+    $scope.count = 3.1415926;
+
+    $scope.stuList = [
+      {age:20,name:'ame1',score:80},
+      {age:30,name:'bame1',score:70},
+      {age:40,name:'mame1',score:100},
+      {age:25,name:'name1',score:89},
+      {age:24,name:'oame1',score:80},
+      {age:29,name:'came1',score:88}
+    ]
+
+  });
+</script>
+</body>
+</html>

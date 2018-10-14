@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--ngApp 启动ng应用 指定作用范围-->
+<html ng-app>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+</head>
+<!--ngInit 初始化数据（可以初始化多个数据）-->
+<body ng-init="num=2;age=20;isMember=false;
+    list=[100,200,300];stu={name:'Mary',age:20}">
+
+<p>{{3+5}}</p>
+<h1>{{num+age}}</h1>
+
+<!--循环 ngRepeat-->
+<ol>
+  <li ng-repeat="tmp in list">{{tmp}}</li>
+</ol>
+
+<div>
+  <p ng-repeat="(key,value) in stu">
+    {{"key is "+key+" value is "+value}}
+  </p>
+</div>
+
+<!-- 选择 ngIf -->
+<p ng-if="isMember">仅会员可见</p>
+
+<!--ngClick/ngShow/ngHide/ngChecked/....-->
+
+<!--ngBind -->
+<p ng-bind="num"></p>
+
+<!--ngSrc 特殊的指令，
+如果要想从模型数据中拿到图片名称显示图片，写上双花括号-->
+<div ng-init="url='1.jpg'"></div>
+<img ng-src="img/{{url}}" alt=""/>
+
+</body>
+</html>

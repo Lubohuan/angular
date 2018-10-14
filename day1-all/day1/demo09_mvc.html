@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+</head>
+<body>
+
+<div ng-controller="myCtrl">
+  <p>{{count}}</p>
+  <button ng-click="add()">点我计数</button>
+</div>
+
+<script>
+  //完成模块的创建和调用
+  var app = angular.module('myApp',['ng'])
+
+  //完成控制器的创建和调用
+  app.controller('myCtrl', function ($scope) {
+    $scope.count = 0;
+    $scope.add = function () {
+      $scope.count++;
+    }
+
+  })
+</script>
+</body>
+</html>

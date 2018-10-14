@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+</head>
+<body ng-controller="myCtrl">
+
+<form name="myForm" ng-submit="submitUser()">
+  <label for="user_name">登录用户名</label>
+  <br/>
+  <input type="text"
+         id="user_name" name="user_name"
+         ng-model="name" required/>
+  <span ng-show=
+          "myForm.user_name.$error.required
+          && myForm.user_name.$dirty">用户名不能为空</span>
+
+  <br/>
+  <label for="user_pwd">密码</label>
+  <br/>
+  <input type="password"
+         id="user_pwd" name="user_pwd"
+         ng-model="pwd" required/>
+  <span ng-show=
+          "myForm.user_pwd.$error.required
+          && myForm.user_pwd.$dirty">密码不能为空</span>
+
+  <input type="submit" ng-disabled='myForm.$invalid' value="登录"/>
+
+</form>
+
+<script>
+  var app = angular.module('myApp',['ng']);
+
+  app.controller('myCtrl',['$scope', function ($scope) {
+      $scope.submitUser = function () {
+        console.log($scope.name+" "+$scope.pwd);
+      }
+  }])
+</script>
+</body>
+</html>

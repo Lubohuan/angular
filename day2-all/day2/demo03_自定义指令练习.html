@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+</head>
+<body>
+
+<!--作为element来使用-->
+<ts-directive ts-name="Hello World"></ts-directive>
+
+<div ng-controller="myCtrl">
+</div>
+
+<script>
+  var app = angular.module('myApp', ['ng']);
+
+  //创建指令
+  app.directive('tsDirective',function(){
+    return {
+      template:'<h1> {{tsName}} </h1>',
+      scope:{
+        tsName:'@'
+      }
+    }
+  })
+
+  app.controller('myCtrl', function () {
+
+  });
+</script>
+</body>
+</html>

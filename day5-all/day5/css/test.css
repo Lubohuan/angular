@@ -1,0 +1,35 @@
+body{
+  overflow: hidden;
+}
+.page {
+  position: absolute;
+  width: 100%;
+}
+.page.ng-enter,
+.page.ng-leave {
+  -webkit-transition: .5s linear all;
+  -moz-transition: .5s linear all;
+  -ms-transition: .5s linear all;
+  -o-transition: .5s linear all;
+  transition: .5s linear all;
+}
+/*准备离开*/
+.page.ng-leave {
+  left: 0;
+  opacity: 1;
+}
+/*离开完成*/
+.page.ng-leave.ng-leave-active {
+  left: -100%;
+  opacity: 0;
+}
+/*刚开始进入*/
+.page.ng-enter {
+  left: 100%;
+  opacity: 0;
+}
+/*进入完成*/
+.page.ng-enter.ng-enter-active {
+  left: 0;
+  opacity: 1;
+}

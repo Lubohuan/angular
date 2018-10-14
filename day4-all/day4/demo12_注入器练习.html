@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+</head>
+<body ng-controller="myCtrl">
+
+<button ng-click="funcPrint()">clickMe</button>
+
+<script>
+  var app = angular.module('myApp',['ng']);
+
+  app.service("$custom", function () {
+    this.print = function () {
+      console.log("$custom服务的方法被调用了");
+    }
+  })
+
+  //采用行内式依赖注入
+  app.controller("myCtrl",["$scope","$injector",
+    function($scope,$injector){
+
+      $scope.funcPrint = function () {
+        if($injector.has("$custom"))
+        {
+          var custom = $injector.get("$custom");
+          custom.print();
+        }
+      }
+
+    }
+  ]);
+
+</script>
+
+</body>
+</html>

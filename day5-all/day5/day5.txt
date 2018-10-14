@@ -1,0 +1,196 @@
+购物车 add delete sum
+
+将添加、删除、计算综合封装在一个服务中$cart,
+采用行内式依赖注入 注入$cart服务，实现购物车的所有的功能
+数据采用$http从php文件中获取初始化数据
+
+
+①架子
+②php文件
+③初始化数据并显示
+④完成功能
+⑤自定义服务
+
+
+angularJS的四大特征：
+MVC
+双向数据绑定
+依赖注入
+模块化设计
+
+
+一、模块之间调用
+
+如果模块A要想调用模块B中的对象或者其他的，
+在创建模块A的时候，指定模块B写在模块A的依赖列表中
+angular.module('moduleA',['moduleB'])
+
+
+一个ng模块一般都有什么构成？
+服务：提供某种对象（变量、方法）
+controller：用于维护我们的模型数据
+指令：和模型数据的绑定
+function：完成指定的功能
+filter：过滤器 过滤、筛选、格式化
+
+框架的定位
+实现数据操作为主的SPA（single page application）应用
+
+
+二、模块:ngRoute模块 实现SPA，
+
+
+SPA应用工作原理:
+
+http://127.0.0.1/index.html#/路由地址
+①请求完整的页面地址 index.html
+②解析地址 拿到 路由地址
+③从路由词典中，根据路由地址，找到真实的模板页面的地址
+④发起ajax请求，加载模板页面，插入到DOM
+
+
+angularJS去实现一个SPA怎么做？
+步骤：
+①创建完整的html页面，引入angular.js angular-route.js
+②创建模块，指定依赖于 ng ngRoute,通过ng-app调用模块
+③指定一个容器用来盛放代码片段 ngView
+④创建模板页面
+⑤配置路由词典
+$routeProvider
+	.when("/myStart",{
+ 		templateUrl:'tpl/start.html'
+	})
+	.otherwise({redirectTo:'/start'})
+⑥测试路由词典的配置 ：通过直接修改地址栏的路由地址去测试
+
+练习：
+要求使用ngRoute来实现一个SPA应用程序；两个代码片段：register.html（注册页面）  person.html(个人中心)，能够通过修改地址栏，切换不同的代码片段。
+
+
+三、ngRoute来实现页面跳转的3种方式
+
+①直接修改地址栏中的路由地址
+②超链接 <a href='#/myStart'></a>
+ 指定超链接的href为路由地址
+③js来实现跳转
+$location.path('/myStart');
+
+
+不同的控制器之间 如果要共享，3种方案：
+①$rootScope
+②控制器之间的嵌套
+③事件 $broadcast、$emit触发事件，通过事件传参。
+
+
+对于控制器来说，调用控制器有2种方案：
+①ng-controller
+②在配置路由词典的事件 
+$routeProvider.when('/myList',{
+	controller:'listCtrl',
+	templateUrl:'tpl/list.html'
+})
+
+
+练习：
+通过ngRoute实现SPA，3个代码片段，register.html,login.html ,main.html,
+要求：
+login:a(去注册)--》register button(去登录)=>main
+
+register: button(跳转到登录)=>login
+
+main: a(退出登录) ==> login
+
+
+四、模板页面跳转如何传参
+
+步骤：
+①明确发送方和接收方
+login->main
+发送： login
+接收： main
+②接收方的配置
+配置接收方的路由
+$routeProvider.when('/myMain/:id',{
+	controller:'',
+	templateUrl:''
+})
+通过注入$routeParams，然后通过$routeParams.id 读取参数
+③发送
+1、直接修改地址栏中的路由地址 
+http://localhost:63342/day5/index.html#/myMain/30
+2、超链接
+   <a href='#/myStart/30'></a>
+   指定超链接的href为路由地址
+3、js来实现跳转
+   $location.path('/myStart/30');
+
+
+练习：实现一个SPA应用，3个代码片段：check.html pay.html send.html
+
+check.html: a -> pay.html 传入price给pay，
+pay.html:pay接收到price并显示，button-》完成支付并跳转拿到send.html
+send.html: button->check.html
+
+
+五、动画模块
+
+angular-animate.js  ngAnimate
+步骤：
+1、引入angular.js angular-animate.js
+2、创建模块时，指定依赖于ngAnimate
+3、调整四个状态：
+   ng-enter ng-enter-active
+   ng-leave ng-leave-active
+
+六、表单组件
+
+属性：
+$pristine 是否未输入过
+$dirty 是否输入过
+$valid 是否验证通过
+$invalid 是否验证未通过
+$error 错误提示信息（email url required。。）
+
+
+每日一练：
+掌握路由词典、跳转的3种方式、传参
+
+start/login/register/main
+
+start:  button（去登录）-->登录页面 传参：fromId
+login:  a（去注册）->register  button(点击登录)-》main
+（接收到参数，点击登录时将这个参数再传给main）
+main：拿到参数显示
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

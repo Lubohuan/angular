@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+</head>
+<body>
+<div ng-controller="myCtrl">
+  <p>{{stuName}}</p>
+</div>
+<script>
+  var app = angular.module('myApp', ['ng']);
+
+  app.service("$student", function () {
+    this.name = "李四";
+    this.study = function () {
+      console.log('正在学习...');
+    }
+  })
+  
+  app.controller('myCtrl', function ($scope,$student) {
+    $scope.stuName = $student.name;
+    $student.study();
+
+  });
+</script>
+</body>
+</html>

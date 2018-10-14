@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+</head>
+<body>
+<div ng-controller="myCtrl">
+
+  <input type="text" ng-model="inputTxt"/>
+  <p>{{inputTxt}}</p>
+
+  <select ng-model="location">
+    <option value="bj">北京</option>
+    <option value="sh">上海</option>
+    <option value="gz">广州</option>
+  </select>
+
+  <!-- ngOptions 配合select来使用-->
+  <select
+    ng-model="city"
+    ng-options="city.name for city in cities"></select>
+
+</div>
+<script>
+  var app = angular.module('myApp', ['ng']);
+
+  app.controller('myCtrl', function ($scope) {
+
+    $scope.city = $scope.cities[1];
+
+    //监听数据变化的方法
+    $scope.$watch('inputTxt', function () {
+      console.log($scope.inputTxt);
+    })
+
+    $scope.$watch('location', function () {
+      console.log($scope.location);
+    })
+
+    $scope.cities = [
+      {name:"北京",value:'bj'},
+      {name:"上海",value:'sh'},
+      {name:"广州",value:'gz'}
+    ]
+
+
+
+  });
+</script>
+</body>
+</html>

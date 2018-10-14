@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html ng-app="myModule">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+</head>
+<body>
+
+<div ng-controller="myCtrl">
+  <button ng-click="add()">添加</button>
+  <table>
+      <thead>
+        <tr>
+          <th>单价</th>
+          <th>数量</th>
+          <th>小计</th>
+          <th>删除</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="obj in cart">
+          <td>{{obj.price}}</td>
+          <td ng-bind="obj.count"></td>
+          <td>{{obj.price*obj.count}}</td>
+          <td>
+            <button ng-click="delete($index)">删除</button>
+          </td>
+          <!--<td>{{$index}}</td>-->
+        </tr>
+      </tbody>
+    </table>
+    <p>{{"总计："+sum()}}</p>
+</div>
+
+<!--
+1、架子
+2、初始化数据
+3、显示数据
+4、实现具体的添加、删除功能
+-->
+<script>
+  //模块的创建和调用
+  var app = angular.module('myModule',['ng']);
+
+  //控制器的创建和调用
+  app.controller('myCtrl', function ($scope) {
+
+    //定义模型数据
+    $scope.cart = [
+      {price:4.5,count:2},
+      {price:5,count:10}
+    ];
+
+    //定义添加的方法
+    $scope.add = function () {
+      $scope.cart.push({price:3,count:5});
+    }
+
+    //定义删除的方法
+    $scope.delete = function (index) {
+      $scope.cart.splice(index,1);
+    }
+
+    //显示总和
+    $scope.sum = function () {
+      var totalSum = 0;
+      for(var i=0;i<$scope.cart.length;i++)
+      {
+        var obj = $scope.cart[i];
+        totalSum+=(obj.count*obj.price);
+      }
+
+      return totalSum;
+    }
+
+  });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+</head>
+<body>
+
+<div ng-controller="myCtrl">
+
+  <ul>
+    <li ng-repeat="obj in dishList">
+      <img ng-src="img/{{obj.url}}" alt=""/>
+      <p>{{obj.name}}</p>
+      <p>{{obj.price}}</p>
+    </li>
+  </ul>
+  <button ng-click="add()">加载更多</button>
+</div>
+
+<script>
+  var app = angular.module('myApp',['ng']);
+
+  app.controller('myCtrl',function($scope){
+
+    $scope.dishList = [
+      {url:'1.jpg',name:'鱼香肉丝',price:30},
+      {url:'2.jpg',name:'京酱肉丝',price:32},
+      {url:'3.jpg',name:'北京烤鸭',price:40}
+    ];
+
+    $scope.add = function () {
+      $scope.dishList.push(
+        {url:'4.jpg',name:'红烧肉',price:42});
+    }
+  });
+
+</script>
+
+</body>
+</html>

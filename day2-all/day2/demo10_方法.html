@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+</head>
+<body>
+<div ng-controller="myCtrl">
+
+</div>
+<script>
+  var app = angular.module('myApp', ['ng']);
+
+  app.controller('myCtrl', function ($scope) {
+
+    $scope.list = [10,20,30];
+    $scope.car ={name:'BMW',price:30};
+
+    angular.forEach($scope.list, function (value,key) {
+      console.log("value is "+value+" key is "+key);
+    })
+
+    angular.forEach($scope.car, function (value,key) {
+      console.log("value is "+value+" key is "+key);
+    })
+
+    $scope.jsonObj = {"name":"Michael","age":30};
+
+    //序列化: 将一个json对象转换为json格式的字符串
+    var jsonStr = angular.toJson($scope.jsonObj);
+    console.log(jsonStr);
+
+    //反序列化：讲一个json格式的字符串转换为json对象或者json数组
+    console.log(angular.fromJson(jsonStr));
+
+
+    var name = "Jack";
+    console.log(angular.uppercase(name));
+
+
+
+
+
+
+
+
+
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+① 控制器和作用范围
+
+$scope 作用域控制对象
+$rootScope 根作用域控制对象
+
+不同的控制器之间是无法直接共享数据的
+借助$rootScope来实现数据的共享（其余的$scope都是根作用域对象的子元素）
+借助控制器之前的嵌套 来实现不同的控制器之间进行通信
+借助事件 $broadcast $emit $on
+
+
+
+② ng内置的服务
+
+$location 注入进来，调用服务所提供的方法
+
+$interval  $timeout 定时器服务
+
+双向数据绑定的工作原理：
+ng框架会添加一个watcher，如果数据变化就是执行DOM操作更新视图，ng有一个周期性的函数 $digest(),称之为$digest循环（周期性的判断数据是否发生了变化）；ng指令以及ng内置的服务都是调用$digest循环，手工调用:$scope.$digest()/ $scope.$apply()
+
+$http 核心服务 主要是完成与服务器端通信的服务
+
+$http({method:'',url:'',data:''}).success().error()
+$http.get('').success()
+$http.post('','').success()  ---》 传参 需要设置header
+
+
+
+③ 回顾 
+双向数据绑定：
+方向1：模型数据到视图 {{}}+ ng常用的指令
+方向2：视图用户的操作绑定到模型数据 ngModel
+
+MVC：
+Model  定义的变量 $scope.num = 10
+View   视图 html 使用ng提供的双花括号以及ng指令
+Controller 控制器 是业务的单元，主要是完成业务逻辑，就是对数据的增删改查的操作
+
+在ng中使用MVC的基本步骤：
+①完成模块的创建和调用
+②完成控制器的创建和调用
+③定义模型数据，显示在视图中
+
+过滤器、方法
+
+
+使用$http从服务器端加载数据，实现一个购物车的功能。
+
+①脚手架
+②在控制器中加载数据
+③显示数据
+④添加add和delete功能
+
+
+
+一、自定义服务
+ng已经内置了很多的服务，这些服务都是一些工具型的通用的服务，不能够满足所有的需求。
+
+创建自定义服务的两大类方法：
+1、借助内置的$provide服务
+
+angular.module('myApp',['ng'],function($provide){
+
+	//自定义服务
+	$provide.factory/service/constant/value
+})
+
+
+2、调用模块中的服务注册方法：factory、service、constant、value
+
+app.factory('服务名称',function(){
+	return {
+	
+	}
+})
+
+//function并不是一个普通的函数 是一个构造函数
+app.service('服务名称',function(){
+	this.name = "";
+	this.funcCall = function(){}
+})
+
+app.constant("服务名称",{})
+app.value("服务名称",{})
+
+对于constant和value方法所创建的服务，可以通过angular.extend去完成数据的重置
+
+factory方法和service方法的区别在factory在普通的函数中返回对象设置服务，service是一个构造函数
+constant和value方法 constant创建配置数据，value设置一些对象
+
+
+练习：
+在$output中定义一个变量
+name ,将变量绑定到视图的段落上显示
+
+练习：
+使用service方法创建服务，服务中提供2个方法:
+开始心跳：每隔1s在控制台打印一句话，用来模拟和服务器的心跳连接
+结束心跳：结束掉定时器
+
+两个按钮：开始、结束
+
+ng的四大特征：
+①采用MVC的设计模式 ②双向数据绑定 ③依赖注入 ④模块化设计
+
+二、文件压缩
+
+YUI 34条军规（网站优化的建议）
+
+文件压缩 减少文件的体积，提高站点的访问速度。
+
+文件压缩的2种方式：
+
+yuicompressor-2.4.8.jar
+
+①通过命令行
+
+java -jar yuicompressor-2.4.8.jar demo06.js > demo06.min.js
+
+
+②借助webStorm
+
+file-->settings-->tools-->file watchers-->点击右上角的加号-->选中yuicompressor js-->找到program这一行的按钮(...)-->选中统一放到C盘的jar文件。
+
+文件压缩：
+删除了所有的注释，删除了没有语义的空白字符，尽可能的简化变量的名称、函数名、形参名（混淆），
+但是所有的数据值（定义的变量、字符串）、关键字不会做任何改变
+
+$scope-->a,程序无法正常执行的问题怎么解决？
+
+
+三、依赖注入
+
+a模块 需要用到 b模块 ==》 a依赖于b
+注入：将我们依赖的模块引入到当前模块的过程
+
+每个ng应用 都是由注入器查找和定位需要的服务，根据注入器查找服务的不同的方式，依赖注入划分为3种方式：
+
+1、推断式依赖注入（猜测式）
+
+根据服务的名称去查找定位 在服务的注册列表中 如果名字写错了 查找不到对应的服务，注入失败。
+不需要关心注入参数的先后顺序。
+
+只适合处理原始的代码，不能处理压缩或者混淆后的代码
+
+2、标记式依赖注入
+使用$inject属性来完成标记，该属性是以一个字符型的数组
+
+ctrFunc.$inject = ["$scope","$write"];
+
+注意事项：在数组中服务的先后的顺序 要和 控制器的回调中服务的先后顺序要保持一致
+
+3、行内式依赖注入（内联式）
+
+app.controller('myCtrl',function(){})
+
+允许开发人员 将一个字符型的数组作为对象的参数，在这个数组中除最后一个元素必须是函数体外，其余都是注入的服务的名称
+
+app.controller('myCtrl',['$scope','$write',function($scope,$write){
+
+}])
+注意事项：在数组中服务的先后的顺序 要和 控制器的回调中服务的先后顺序要保持一致
+
+建议：采用行内式依赖注入完成项目。
+
+
+练习：采用行内式的依赖注入来完成以下练习
+
+实现一个加法的计算器服务，拿到用户输入的两个数字，（采用factory创建服务）使用服务所定义的相加add方法，将数字求和并弹窗显示
+
+视图：
+两个input和一个求和的按钮
+
+
+
+
+注入器：$injector
+
+has("服务名称")： 判断指定的服务是否存在
+get("服务名称")： 得到一个存在的服务的实例对象
+
+
+两种使用方案：
+①创建一个ng对象的时候，注入$injector
+②angular.injector（）
+
+
+练习：在$custom服务的基础之上，视图放置一个按钮，点击按钮时调用$custom服务所提供的print方法
+
+服务是通过$injector获取服务的。
+
+app.controller('myCtrl',function($scope,$injector){
+	
+})
+
+采用行内式依赖注入，通过$injector服务查找并实例化$custom服务。
+
+
+
+每日一练：
+
+购物车 add delete sum
+
+将添加、删除、计算综合封装在一个服务中$cart,
+采用行内式依赖注入注入$cart服务，实现购物车的所有的功能
+数据采用$http从php文件中获取初始化数据
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

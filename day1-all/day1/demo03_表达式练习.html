@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <script src="js/angular.js"></script>
+  <title></title>
+</head>
+<body ng-app>
+
+<table ng-init="stuList=[
+  {name:'Jack',age:30,score:100},
+  {name:'Mary',age:33,score:80},
+  {name:'Michael',age:31,score:50},
+  {name:'Lary',age:32,score:90},
+  {name:'Lincoln',age:30,score:66}
+  ]">
+  <thead>
+  <tr>
+    <th>姓名</th>
+    <th>年龄</th>
+    <th>成绩</th>
+  </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>{{stuList[0].name}}</td>
+      <td>{{stuList[0].age}}</td>
+      <td>{{stuList[0].score}}</td>
+    </tr>
+    <tr>
+      <td>{{stuList[1].name}}</td>
+      <td>{{stuList[1].age}}</td>
+      <td>{{stuList[1].score}}</td>
+    </tr>
+    <tr>
+      <td>{{stuList[2].name}}</td>
+      <td>{{stuList[2].age}}</td>
+      <td>{{stuList[2].score}}</td>
+    </tr>
+    <tr>
+      <td>{{stuList[3].name}}</td>
+      <td>{{stuList[3].age}}</td>
+      <td>{{stuList[3].score}}</td>
+    </tr>
+    <tr>
+      <td>{{stuList[4].name}}</td>
+      <td>{{stuList[4].age}}</td>
+      <td>{{stuList[4].score}}</td>
+    </tr>
+  </tbody>
+
+</table>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+</head>
+<body>
+
+<!--调用指令-->
+
+<!--element-->
+<ts-hello test-name="directive"></ts-hello>
+<div ng-controller="myCtrl">
+</div>
+
+<script>
+  var app = angular.module('myApp',['ng']);
+
+  //自定义指令
+  app.directive('tsHello', function () {
+    return {
+      template:"<h1> Hello {{testName}} </h1>",
+      restrict:'EM',
+      replace:true,
+      scope:{
+        testName:'@'
+      }
+    }
+  })
+
+  app.controller('myCtrl',function($scope){
+
+  });
+
+</script>
+
+</body>
+</html>

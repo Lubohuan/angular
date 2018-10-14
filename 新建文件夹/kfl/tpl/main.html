@@ -1,0 +1,62 @@
+
+<div ng-include="'tpl/include/header.html'"></div>
+
+<div class="container">
+
+  <!-- 搜索框-->
+  <div class="form-group has-feedback">
+    <input type="text" class="form-control"
+           placeholder="请输入菜品名称或者原材料名称"/>
+    <span class="form-control-feedback glyphicon glyphicon-search"></span>
+  </div>
+
+  <!-- 菜品列表-->
+  <div class="list-group">
+
+    <a href="#/detail" class="list-group-item">
+      <div class="media">
+        <div class="media-left media-middle">
+          <img class="media-object"
+               src="img/p0281.jpg" alt=""/>
+        </div>
+        <div class="media-body">
+          <h3>鱼香肉丝</h3>
+          <p>原材料的介绍</p>
+          <p>￥30</p>
+        </div>
+      </div>
+    </a>
+    <a href="#/detail" class="list-group-item">
+      <div class="media">
+        <div class="media-left media-middle">
+          <img class="media-object"
+               src="img/p0281.jpg" alt=""/>
+        </div>
+        <div class="media-body">
+          <h3>鱼香肉丝2</h3>
+          <p>原材料的介绍</p>
+          <p>￥30</p>
+        </div>
+      </div>
+    </a>
+    <a href="#/detail" class="list-group-item">
+      <div class="media">
+        <div class="media-left media-middle">
+          <img class="media-object"
+               src="img/p0281.jpg" alt=""/>
+        </div>
+        <div class="media-body">
+          <h3>鱼香肉丝3</h3>
+          <p>原材料的介绍</p>
+          <p>￥30</p>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- 加载更多-->
+  <button class="btn btn-block btn-success">加载更多</button>
+
+</div>
+<div ng-include="'tpl/include/footer.html'"></div>

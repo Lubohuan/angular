@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+</head>
+<body>
+
+<!--扩展属性-->
+<div ts-hello></div>
+
+<!--扩展标签-->
+<ts-hello></ts-hello>
+
+<!--class-->
+<div class="ts-hello"></div>
+
+<!--comment-->
+
+<!-- directive:ts-hello -->
+
+<div ng-controller="myCtrl">
+
+</div>
+
+<script>
+  var app = angular.module('myApp',['ng']);
+
+  //创建指令 ngApp ngInit
+  app.directive('tsHello',function(){
+    return {
+      template:'<p> Hello Directive </p>',
+      restrict:'EACM',
+      replace:true
+    }
+  })
+
+  app.controller('myCtrl',function($scope){
+
+  });
+
+</script>
+
+</body>
+</html>

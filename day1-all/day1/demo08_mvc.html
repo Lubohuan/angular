@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!-- 调用模块-->
+<html ng-app="myModule">
+<head lang="en">
+  <meta charset="UTF-8">
+  <script src="js/angular.js"></script>
+  <title></title>
+</head>
+<body>
+
+<!--通过ngController调用控制器-->
+<div ng-controller="myCtrl">
+  <p>{{num}}</p>
+  <!-- 通过ngClick指定按钮点击的回调-->
+  <button ng-click="funcClick()">clickMe</button>
+</div>
+
+
+<script>
+  //创建模块
+  var app = angular.module('myModule',['ng']);
+
+  //创建控制器 controller
+  app.controller('myCtrl', function ($scope) {
+    console.log(' in myCtrl ');
+
+    //定义模型数据 Model
+    $scope.num = 10;
+
+    //定义一个方法
+    $scope.funcClick = function(){
+      console.log(' button is pressed ');
+    }
+
+  })
+</script>
+
+</body>
+</html>

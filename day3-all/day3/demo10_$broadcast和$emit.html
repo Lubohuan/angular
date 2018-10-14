@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+</head>
+<body>
+
+<div ng-controller="myCtrl01">
+
+  <!-- 调用子控制器中的方法-->
+  <button ng-click="callChild()">调用子控制器</button>
+
+  <div ng-controller="myCtrl02">
+
+    <button ng-click="toChild()">传递数据给子控制器</button>
+
+    <div ng-controller="myCtrl03">
+
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  var app = angular.module('myApp',['ng']);
+
+  app.controller('myCtrl01', function ($scope) {
+
+    //对event_1事件绑定，并制定接收到之后的处理
+      $scope.$on('event_1', function (event,data) {
+          console.log(data);
+          $scope.callChild = data;
+      })
+  });
+
+  app.controller('myCtrl02', function ($scope) {
+      $scope.toParent  = function () {
+        console.log('toParent method is called ');
+      }
+      //通过事件将数据或者方法从子控制器中传递给父控制器
+      $scope.$emit('event_1',$scope.toParent)
+      $scope.toChild = function () {
+        //将事件从父传递给子
+        $scope.$broadcast('event_2',"Hello myCtrl03")
+      }
+  });
+
+  app.controller('myCtrl03', function ($scope) {
+    $scope.$on('event_2',function(event,data){
+        console.log(data);
+    });
+  })
+
+
+</script>
+</body>
+</html>

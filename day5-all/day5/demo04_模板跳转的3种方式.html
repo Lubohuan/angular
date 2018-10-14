@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+  <script src="js/angular-route.js"></script>
+</head>
+<body ng-controller="parentCtrl">
+
+<!--盛放代码片段的容器-->
+<div ng-view></div>
+
+<script >
+  var app = angular.module("myApp",['ng','ngRoute']);
+
+  //完成路由词典的配置
+  app.config(function ($routeProvider) {
+    $routeProvider
+      .when('/myList',{
+        controller:'listCtrl',
+        templateUrl:'tpl/list.html'
+      })
+      .when('/myDetail',{
+        templateUrl:'tpl/detail.html'
+      })
+      .otherwise({redirectTo:'/myList'})
+  })
+
+  app.controller('listCtrl',['$scope','$location',
+    function($scope,$location){
+      $scope.jumpDetail = function () {
+        $location.path('/myDetail');
+      }
+    }
+  ])
+
+  app.controller('parentCtrl',['$scope','$location',
+    function ($scope,$location) {
+
+      $scope.jump = function (path) {
+        $location.path(path);
+      }
+
+  }])
+
+
+</script>
+
+</body>
+</html>

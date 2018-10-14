@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+</head>
+<body>
+<div ng-controller="myCtrl">
+  <!-- 方向2：将表单组件用户的输入绑定到模型数据-->
+  <input type="checkbox" ng-model="isAgree"/>
+  <!-- 方向1：将模型数据绑定到视图中-->
+  <button ng-disabled="!isAgree">注册</button>
+</div>
+<script>
+  var app = angular.module('myApp', ['ng']);
+
+
+  app.controller('myCtrl', function ($scope) {
+
+  /*  $scope.$watch('isAgree', function () {
+      console.log($scope.isAgree);
+    })*/
+
+  });
+</script>
+</body>
+</html>

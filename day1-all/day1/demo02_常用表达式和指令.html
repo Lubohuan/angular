@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/angular.js"></script>
+</head>
+<body ng-app>
+
+<p>{{3+5}}</p>
+
+<!--测试比较运算、逻辑运算、三目运算 -->
+
+<p>{{3>2}}</p>
+<h1>true&&false result is {{true && false}}</h1>
+<span>{{3<5?'true':'false'}}</span>
+
+<!--ngInit指令-->
+<span ng-init="name='jack'">
+  {{name}}
+</span>
+
+<p>name  is {{name}}</p>
+
+<span ng-init="car={name:'BMW',price:20}"></span>
+
+<p>车的名称：{{car.name}}</p>
+
+<span ng-init="list=[10,20,30]">
+  {{list[2]}}
+</span>
+</body>
+</html>
